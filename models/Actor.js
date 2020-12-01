@@ -14,7 +14,6 @@ Actor.init ({
     }
 }, {
     sequelize,
-    modelName: 'actor',
     freezeTableName: true,
     timestamps: false
 });

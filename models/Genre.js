@@ -15,7 +15,6 @@ Genre.init({
     }
 }, {
     sequelize,
-    modelName: 'genre',
     freezeTableName: true,
     timestamps: false
 });

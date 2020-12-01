@@ -35,7 +35,6 @@ Movies.init({
     }
 }, {
     sequelize,
-    modelName: 'movie',
     freezeTableName: true,
     timestamps: false
 });

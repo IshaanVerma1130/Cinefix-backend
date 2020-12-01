@@ -14,7 +14,6 @@ Director.init({
     }
 }, {
     sequelize,
-    modelName: 'director',
     freezeTableName: true,
     timestamps: false
 });

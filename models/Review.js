@@ -12,7 +12,6 @@ Review.init({
     }
 }, {
     sequelize,
-    modelName: 'review',
     freezeTableName: true,
     timestamps: false
 });

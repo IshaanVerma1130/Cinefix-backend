@@ -22,22 +22,46 @@ sequelize.authenticate()
   });
 
 app.post('/login', async (res, req) => {
-  // const name = req.body.username
+  const name = req.body.username
   const password = req.body.password
   const email = req.body.email
   
   const user = await User.sequelize.query(
-    `SELECT CASE WHEN EXISTS 
-      (SELECT * FROM User WHERE (email = ? and password = ?)) 
-    THEN CAST(1 AS BIT)   
-    ELSE CAST(0 AS BIT) 
-    END`,
+    'SELECT * FROM User WHERE email = ? AND password = ?',
     {replacements: [email, password], type: User.sequelize.QueryType.SELECT}
   );
 
-  if (user === 1){
-    
+  if (user){
+    res.json({
+      "user": user
+    })
   }
+
+  else {
+    res.json({
+      "status": "User doesnot exist"
+    })
+  }
+
+});
+
+app.post('/signup', async (res, req) => {
+  const name = req.body.username
+  const email = req.body.email
+  const password = req.body.password
+
+  const user = await User.sequelize.query(
+    'SELECT * FROM User WHERE email = ? AND password = ?',
+    {replacements: [email, password], type: User.sequelize.QueryType.SELECT}
+  );
+
+  if (!user){
+    await User.sequelize.query(
+      'INSERT INTO User(username, email, password) VALUES (?, ?, ?)',
+      {replacements: [name, email, password], type: User.sequelize.QueryTypes.INSERT}
+    )
+  }
+
 });
 
 
