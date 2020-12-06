@@ -1,5 +1,5 @@
-const sequelize = require('../sequelize');
 const { Model } = require('sequelize');
+const sequelize = require('../connection');
 
 class Actor_Movie extends Model { }
 Actor_Movie.init({
@@ -8,7 +8,5 @@ Actor_Movie.init({
     freezeTableName: true,
     timestamps: false
 });
-
-Actor_Movie.sync();
 
 module.exports = Actor_Movie;

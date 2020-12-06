@@ -1,6 +1,5 @@
-const sequelize = require('../sequelize');
 const { Model, DataTypes } = require('sequelize');
-const Movie = require('./Movie');
+const sequelize = require('../connection');
 
 class Review extends Model{ }
 Review.init({
@@ -15,7 +14,5 @@ Review.init({
     freezeTableName: true,
     timestamps: false
 });
-
-Review.sync();
 
 module.exports = Review;

@@ -1,5 +1,5 @@
-const sequelize = require('../sequelize');
 const { Model } = require('sequelize');
+const sequelize = require('../connection');
 
 class Genre_Movie extends Model { }
 Genre_Movie.init({
@@ -8,7 +8,5 @@ Genre_Movie.init({
     freezeTableName: true,
     timestamps: false
 });
-
-Genre_Movie.sync();
 
 module.exports = Genre_Movie;

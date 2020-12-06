@@ -1,69 +1,25 @@
 const Express = require("express");
-const Sequelize = require("sequelize");
 const bodyParser = require('body-parser');
-const { body, validationResult } = require("express-validator");
-const User = require('./models/User');
+// const { body, validationResult } = require("express-validator");
+const userController = require('./controller/user-controller');
+const searchController = require('./controller/search-controller');
+
+const sequelize = require('./connection');
+sequelize.sync();
 
 const app = Express();
 app.use(Express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
-const sequelize = new Sequelize(process.env.database, process.env.username, process.env.password, {
-  host: process.env.host,
-  dialect: 'mysql'
-});
-
-// Check if connection to db was established.
-sequelize.authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  }).catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-app.post('/login', async (res, req) => {
-  const name = req.body.username
-  const password = req.body.password
-  const email = req.body.email
-  
-  const user = await User.sequelize.query(
-    'SELECT * FROM User WHERE email = ? AND password = ?',
-    {replacements: [email, password], type: User.sequelize.QueryType.SELECT}
-  );
-
-  if (user){
-    res.json({
-      "user": user
-    })
-  }
-
-  else {
-    res.json({
-      "status": "User doesnot exist"
-    })
-  }
-
-});
-
-app.post('/signup', async (res, req) => {
-  const name = req.body.username
-  const email = req.body.email
-  const password = req.body.password
-
-  const user = await User.sequelize.query(
-    'SELECT * FROM User WHERE email = ? AND password = ?',
-    {replacements: [email, password], type: User.sequelize.QueryType.SELECT}
-  );
-
-  if (!user){
-    await User.sequelize.query(
-      'INSERT INTO User(username, email, password) VALUES (?, ?, ?)',
-      {replacements: [name, email, password], type: User.sequelize.QueryTypes.INSERT}
-    )
-  }
-
-});
-
+app.post('/login', userController.login);
+app.post('/signup', userController.signup);
+app.get('/search/name', searchController.searchByName);
+app.get('/search/actor', searchController.searchByActor);
+app.get('/search/genre', searchController.searchByGenre);
+app.get('/search/year', searchController.searchByYear);
+app.get('/search/imdb', searchController.searchByIMDB);
+app.get('/search/urate', searchController.searchByURate);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

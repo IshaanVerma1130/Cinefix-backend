@@ -1,12 +1,12 @@
-const sequelize = require('../sequelize');
 const { Model, DataTypes } = require('sequelize');
-const Director_Movie = require('./Director_Movie');
-const Genre_Movie = require('./Genre_Movie');
-const Actor_Movie = require('./Actor_Movie');
 const Review = require('./Review');
+const Director_Movie = require('./Director_Movie');
+const Actor_Movie = require('./Actor_Movie');
+const Genre_Movie = require('./Genre_Movie');
+const sequelize = require('../connection');
 
-class Movies extends Model { }
-Movies.init({
+class Movie extends Model { }
+Movie.init({
     movie_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -19,7 +19,7 @@ Movies.init({
         type: DataTypes.INTEGER
     },
     imdb_rate: {
-        type: DataTypes.DECIMAL(4,2)
+        type: DataTypes.DECIMAL(4, 2)
     },
     years: {
         type: DataTypes.INTEGER
@@ -39,36 +39,60 @@ Movies.init({
     timestamps: false
 });
 
-Movies.hasMany(Genre_Movie, {
+// 1:m from Movie to Actor_Movie
+Movie.hasMany(Actor_Movie, {
     foreignKey: {
         name: 'movie_id',
         allowNull: false
     }
 });
-Genre_Movie.belongsTo(Movies);
-
-Movies.hasMany(Actor_Movie, {
+Actor_Movie.belongsTo(Movie, {
     foreignKey: {
         name: 'movie_id',
         allowNull: false
     }
 });
-Actor_Movie.belongsTo(Movies);
 
-Movies.hasMany(Director_Movie, {
-    foreignKey: {
-        name: 'movie_id',
-        allowNull: false
-    }
-});
-Director_Movie.belongsTo(Movies);
-
+// 1:m from Movie to Review
 Movie.hasMany(Review, {
     foreignKey: {
-        name: movie_id,
+        name: 'movie_id',
         allowNull: false
     }
 });
-Review.belongsTo(Movie);
+Review.belongsTo(Movie, {
+    foreignKey: {
+        name: 'movie_id',
+        allowNull: false
+    }
+});
 
+// 1:m from Movie to Director_Movie
+Movie.hasMany(Director_Movie, {
+    foreignKey: {
+        name: 'movie_id',
+        allowNull: false
+    }
+});
+Director_Movie.belongsTo(Movie, {
+    foreignKey: {
+        name: 'movie_id',
+        allowNull: false
+    }
+});
 
+// 1:m from Movie to Genre_Movie
+Movie.hasMany(Genre_Movie, {
+    foreignKey: {
+        name: 'movie_id',
+        allowNull: false
+    }
+});
+Genre_Movie.belongsTo(Movie, {
+    foreignKey: {
+        name: 'movie_id',
+        allowNull: false
+    }
+});
+
+module.exports = Movie;
