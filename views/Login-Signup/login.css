@@ -1,0 +1,10 @@
+body {background-image: url("Login-signup-bg.png");
+}
+
+.Active-login {
+    width: 40%;
+    align-content: center;
+    margin: auto;
+    padding-top: 10%;
+    color: #fff;
+}

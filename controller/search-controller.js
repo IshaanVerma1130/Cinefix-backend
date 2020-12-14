@@ -4,7 +4,8 @@ const Genre = require('../models/Genre');
 const Director = require('../models/Director');
 const Actor_Movie = require('../models/Actor_Movie');
 const Genre_Movie = require('../models/Genre_Movie');
-const userController = require('./user-controller');
+const Director_Movie = require('../models/Director_Movie');
+const { min } = require('../models/Director_Movie');
 
 async function searchByName(req, res) {
     const name = req.body.name
@@ -13,8 +14,33 @@ async function searchByName(req, res) {
         `SELECT * FROM Movie WHERE title LIKE '%${name}%'`,
         { type: Movie.sequelize.QueryTypes.SELECT }
     );
+    //console.log(movies)
+    if (movies.length == 1) {
 
-    res.json({ movies });
+        const actors = await Actor_Movie.sequelize.query(
+            `SELECT actor_name FROM Actor WHERE actor_id in 
+            (SELECT actor_id FROM Actor_Movie where movie_id =
+                (SELECT movie_id FROM Movie WHERE Movie.title LIKE '%${name}%'))`,
+            { type: Actor_Movie.sequelize.QueryTypes.SELECT }
+        );
+
+        // console.log(actors)
+        const directors = await Director_Movie.sequelize.query(
+            `SELECT director_name FROM Director WHERE director_id in 
+            (SELECT director_id FROM Director_Movie where movie_id =
+                (SELECT movie_id FROM Movie WHERE Movie.title LIKE '%${name}%'))`,
+            { type: Director_Movie.sequelize.QueryTypes.SELECT }
+        );
+        
+        const hours = Math.floor(movies[0].runtime / 60)
+        const minutes = movies[0].runtime - (60 * hours)
+        const runtime = { hours: hours, minutes: minutes }
+        
+        res.render('Display-movie.ejs', { movies: movies, actors: actors, directors: directors, runtime: runtime });
+    }
+    else {
+        res.render('Movie-list.ejs', { movies: movies });
+    }
 }
 
 async function searchByActor(req, res) {
@@ -31,7 +57,7 @@ async function searchByActor(req, res) {
 }
 
 async function searchByGenre(req, res) {
-    const genre = req.body.genre
+    const genre = req.params.id
 
     const movies = await Movie.sequelize.query(
         `SELECT * FROM Movie WHERE movie_id IN 
@@ -39,8 +65,8 @@ async function searchByGenre(req, res) {
                 (SELECT genre_id FROM Genre WHERE genre_name = ?))`,
         { replacements: [genre], type: Movie.sequelize.QueryTypes.SELECT }
     );
-
-    res.json({ movies });
+    // console.log(movies);
+    res.render('Movie-list.ejs', { movies: movies });
 }
 
 async function searchByYear(req, res) {

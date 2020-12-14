@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Movie</title>
+
+    <!-- Bootstap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS Style Sheet -->
+    <link rel="stylesheet" href="/Display-movie.css" />
+
+    <!-- JS Scrips for Bootstap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container-fluid navbar-div">
+      <!-- NavBar -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.ejs">CineFix</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <ul>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle genre-menu"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Genre
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/action"
+                >Action</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/adventure"
+                >Adventure</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/comedy"
+                >Comedy</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/crime"
+                >Crime</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/documentary"
+                >Documentary</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/drama"
+                >Drama</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/fantasy"
+                >Fantasy</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/horror"
+                >Horror</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/music"
+                >Music</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/mystery"
+                >Mystery</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/romance"
+                >Romance</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/sci-fi"
+                >Sci-Fi</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/thriller"
+                >Thriller</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/sport"
+                >Sport</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/film-noir"
+                >Film-Noir</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/family"
+                >Family</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/short"
+                >Short</a
+              >
+              <a
+                class="dropdown-item"
+                href="http://localhost:3000/search/genre/western"
+                >Western</a
+              >
+            </div>
+          </li>
+        </ul>
+
+        <div class="col-md-3 offset-md-3">
+          <form
+            class="form-inline my-2 my-lg-0"
+            method="POST"
+            action="http://localhost:3000/search/name"
+          >
+            <input
+              class="form-control mr-sm-2"
+              type="text"
+              name="name"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Login-Signup/login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Login-Signup/signup.html">Signup</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="display-div">
+      <h1 class="movie-name"><%= movies[0].title %></h1>
+      <div class="img-display">
+        <img src="<%= movies[0].img_url %>" alt="Movie-img" />
+        <p><%= movies[0].plot %></p>
+      </div>
+
+      <div class="input-table">
+        <table>
+          <tr>
+            <th>Director</th>
+            <% for (let i = 0; i < directors.length; i++) { %> 
+              <% if (i == directors.length - 1) { %>
+                <td><%= directors[i].director_name %></td>
+              <% } else { %>
+                <td><%= directors[i].director_name %>,</td>
+              <% } %> 
+            <% } %>
+          </tr>
+          <tr>
+            <th>IMdb</th>
+            <td><%= movies[0].imdb_rate %></td>
+          </tr>
+          <tr>
+            <th>Actor</th>
+            <% for (let i = 0; i < actors.length; i++) { %> 
+              <% if (i == actors.length - 1) { %>
+                <td><%= actors[i].actor_name %></td>
+              <% } else { %>
+                <td><%= actors[i].actor_name %>,</td>
+              <% } %>
+            <% } %>
+          </tr>
+          <tr>
+            <th>User rating</th>
+            <td><%= movies[0].user_rate %></td>
+          </tr>
+          <tr>
+            <th>Runtime</th>
+            <td><%= runtime.hours %>hr</td>
+            <td><%= runtime.minutes %>mins</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Your Review</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div>
+    </div>
+  </body>
+</html>
