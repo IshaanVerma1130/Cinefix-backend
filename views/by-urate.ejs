@@ -40,20 +40,18 @@
     </div>
 
     <div class="list-div">
-      <table>
-        <% for (let i = 0; i< movies.length; i++) { %>
-        <tr>
-          <td class="number"><%=i+1%>.</td>
-          <td><img src="<%= movies[i].img_url %>" alt="movie-poster" /></td>
-          <td>
-            <a
-              href="http://localhost:3000/select/movie/<%= movies[i].movie_id %>"
-              ><%= movies[i].title %></a
-            >
-          </td>
-        </tr>
-        <% } %>
-      </table>
+      <ol>
+        <li value="movie-id">
+          <table>
+            <% for (let i = 0; i < movies.length; i++) { %>
+            <td><img src="<%= movies[i].img_url" alt="movie-img" /></td>
+            <th><%= movies[i].title %></th>
+            <th><%= movies[i].user_rate %></th>
+            <% } %>
+            <tr></tr>
+          </table>
+        </li>
+      </ol>
     </div>
   </body>
 </html>

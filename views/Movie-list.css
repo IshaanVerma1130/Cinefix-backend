@@ -1,5 +1,15 @@
-/**************************** NavBar *************************/
+img {
+  width: 45%;
+  height: auto;
+  position: static;
+  margin-bottom: 20px;
+}
 
+td {
+  padding: 0;
+}
+
+/**************************** NavBar *************************/
 .navbar-div {
     background-color: #14274e;
 }
@@ -22,8 +32,12 @@
   }
 
 .list-div {
-    width: 60%;
+    width: 30%;
     text-align: left;
     margin: auto;
     padding-top: 100px;
+}
+
+.number {
+  padding-right: 10px;
 }

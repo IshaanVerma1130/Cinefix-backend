@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Movie</title>
+    <title>Search Movies</title>
 
     <!-- Bootstap -->
     <link
@@ -13,7 +13,7 @@
     />
 
     <!-- CSS Style Sheet -->
-    <link rel="stylesheet" href="/Movie-list.css" />
+    <link rel="stylesheet" href="/by-actor-director.css"/>
 
     <!-- JS Scrips for Bootstap -->
     <script
@@ -39,21 +39,18 @@
       <%- include (navBar) %>
     </div>
 
-    <div class="list-div">
-      <table>
-        <% for (let i = 0; i< movies.length; i++) { %>
-        <tr>
-          <td class="number"><%=i+1%>.</td>
-          <td><img src="<%= movies[i].img_url %>" alt="movie-poster" /></td>
-          <td>
-            <a
-              href="http://localhost:3000/select/movie/<%= movies[i].movie_id %>"
-              ><%= movies[i].title %></a
-            >
-          </td>
-        </tr>
-        <% } %>
-      </table>
+    <h2 class="heading"><%= list.type %></h2>
+
+    <div>
+        <ol>
+          <% for (let i = 0; i < list.array.length; i++) { %>
+            <% if (list.type == 'Actors') { %>
+            <li><a href="http://localhost:3000/search/actor/<%= list.array[i].actor_name %>" ><%= list.array[i].actor_name %></a></li>
+            <% } else { %>
+            <li><a href="http://localhost:3000/search/director/<%= list.array[i].director_name %>"><%= list.array[i].director_name %></a></li>  
+            <% } %>
+          <% } %>            
+        </ol>
     </div>
   </body>
 </html>
