@@ -4,12 +4,16 @@ img {
 }
 td {
     text-align: left;
+    
 }
 th {
     text-align: left;
     padding-right: 50px;
 }
-
+ tr {
+     margin-bottom: 15px;
+    
+ }
 /**************************** NavBar *************************/
 
 .navbar-div {
@@ -58,11 +62,18 @@ th {
      margin: 0 0 50px 22px;
  }
 
- .input-group {
+
+ .rating-input {
      margin-bottom: 30px;
  }
- .review {
+
+ .review-input {
      margin-bottom: 30px;
+ }
+
+ .review-table {
+     margin-bottom: 30px;
+     width: 550px;
  }
 
  .submit {

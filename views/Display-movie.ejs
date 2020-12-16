@@ -84,23 +84,28 @@
       </table>
     </div>
 
-    <div class="get-reviews">
+    <h5 style="text-align: left;">User Reviews</h5>
 
+    <div class="get-reviews">
       <ol>
         <% for (let i = 0; i < reviews.length; i++) { %>
           <li>
-            <table>
+            <table class="review-table">
               <tr>                
-                <td><%= reviews[i].username %></td>
-                <td><%= reviews[i].rating %></td>                  
+                <td style="width: 85%;">
+                <span style="font-weight:bold;"><%= reviews[i].username %></span>  
+                </td>
+                <td style="width: 85%;">
+                  <span style="font-weight:bold;"><%= reviews[i].rating %></span>
+                </td>
               </tr>
               <tr>
-                <td colspan="2"><%= reviews[i].review %></td>
+                <td colspan="2" style="width: 85%;"><%= reviews[i].review %></td>
               </tr>
             </table>
           </li>
         <% } %>
-        </ol>
+      </ol>
     </div>
 
     <!-- <div class="input-group">
