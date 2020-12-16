@@ -1,0 +1,84 @@
+img {
+    padding-bottom: 30px;
+    width: 30%;
+}
+td {
+    text-align: left;
+}
+th {
+    text-align: left;
+    padding-right: 50px;
+}
+
+/**************************** NavBar *************************/
+
+.navbar-div {
+    background-color: #14274e;
+}
+
+.navbar {
+    padding: 30px 30px 1.5rem;
+    font-family: "Ubuntu", sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 2rem;
+  }
+  
+  .nav-item {
+      padding: 0 10px;
+  }
+  
+  .genre-menu {
+    color: #f1f6f9;
+  }
+
+
+ /****************************  Display div **************************/
+
+.movie-name {
+    color: #14274e;
+    font-family: "Montserrat";
+    padding-bottom: 30px;
+}
+
+ .display-div {
+     width: 50%;
+     text-align: center;
+     margin: auto;
+     padding-top: 5rem;
+     padding-bottom: 40px;
+ }
+
+ .img-display {
+     margin-bottom: 50px;
+ }
+
+ .input-table {
+     margin: 0 0 50px 22px;
+ }
+
+ .input-group {
+     margin-bottom: 30px;
+ }
+ .review {
+     margin-bottom: 30px;
+ }
+
+ .submit {
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #f1f6f9;
+    font-size: 20px;
+    background: #9ba4b4;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+  }
+  
+  .submit:hover {
+    color: #fff;
+    background: #14274e;
+    text-decoration: none;
+  }

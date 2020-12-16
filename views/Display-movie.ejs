@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Movie</title>
+
+  <!-- Bootstap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+
+  <!-- CSS Style Sheet -->
+  <link rel="stylesheet" href="/Display-movie.css" />
+
+  <!-- JS Scrips for Bootstap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container-fluid navbar-div">
+    <!-- NavBar -->
+    <%- include (navBar) %>
+  </div>
+
+  <div class="display-div">
+    <h1 class="movie-name">
+      <%= movies[0].title %>
+    </h1>
+    <div class="img-display">
+      <img src="<%= movies[0].img_url %>" alt="Movie-img" />
+      <p>
+        <%= movies[0].plot %>
+      </p>
+    </div>
+
+    <div class="input-table">
+      <table>
+        <tr>
+          <th>Director</th>
+          <% for (let i=0; i < directors.length; i++) { %>
+            <% if (i==directors.length - 1) { %>
+              <td><a href="http://localhost:3000/search/director/<%= directors[i].director_name %>"><%= directors[i].director_name %></a></td>
+            <% } else { %>
+              <td><a href="http://localhost:3000/search/director/<%= directors[i].director_name %>"><%= directors[i].director_name %></a>,</td>
+            <% } %>
+          <% } %>
+        </tr>
+        <tr>
+          <th>IMdb</th>
+          <td>
+            <%= movies[0].imdb_rate %>
+          </td>
+        </tr>
+        <tr>
+          <th>Actor</th>
+          <% for (let i=0; i < actors.length; i++) { %>
+            <% if (i==actors.length - 1) { %>
+              <td><a href="http://localhost:3000/search/actor/<%= actors[i].actor_name %>"><%= actors[i].actor_name %></a></td>
+            <% } else { %>
+              <td><a href="http://localhost:3000/search/actor/<%= actors[i].actor_name %>"><%= actors[i].actor_name %></a>,</td>
+            <% } %>
+          <% } %>
+        </tr>
+        <tr>
+          <th>User rating</th>
+          <td>
+            <%= movies[0].user_rate %>
+          </td>
+        </tr>
+        <tr>
+          <th>Runtime</th>
+          <td>
+            <%= runtime.hours %>hr <%= runtime.minutes %>mins
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="get-reviews">
+
+      <ol>
+        <% for (let i = 0; i < reviews.length; i++) { %>
+          <li>
+            <table>
+              <tr>                
+                <td><%= reviews[i].username %></td>
+                <td><%= reviews[i].rating %></td>                  
+              </tr>
+              <tr>
+                <td colspan="2"><%= reviews[i].review %></td>
+              </tr>
+            </table>
+          </li>
+        <% } %>
+        </ol>
+    </div>
+
+    <!-- <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Your Review</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div> -->
+
+    <form action="http://localhost:3000/review/<%= movies[0].movie_id %>" method="POST" class="user-rating">
+      <div class="review-input">
+        <!-- <label for="review">Enter Your Review</label> -->
+        <input type="text" name="review" placeholder="Enter your review...">
+      </div>
+      <div class="rating-input">
+        <input type="text" name="rating" placeholder="Enter rating out of 10">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>
